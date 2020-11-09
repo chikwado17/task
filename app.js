@@ -11,7 +11,11 @@ const taskInput = document.querySelector('#task');
 
 //load all event listeners
 function loadAllEventListeners() {
+    //add task event
     form.addEventListener('submit', addTask);
+
+    //remove task event
+    taskList.addEventListener('click', removeTask);
 }
 
 //function to add task
@@ -45,6 +49,30 @@ function addTask(e) {
     //clear input
     taskInput.value = '';
 }
+
+
+//Remove Task
+function removeTask(e) {
+    if(e.target.parentElement.classList.contains('delete-item')){
+        if(confirm('Are You Sure?')) {
+            e.target.parentElement.parentElement.remove();
+        }
+    } 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //calling function loadAllEventListeners
 loadAllEventListeners();
