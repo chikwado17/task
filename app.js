@@ -8,7 +8,6 @@ const filter = document.querySelector('#filter');
 const taskInput = document.querySelector('#task');
 
 
-
 //load all event listeners
 function loadAllEventListeners() {
     //add task event
@@ -16,6 +15,9 @@ function loadAllEventListeners() {
 
     //remove task event
     taskList.addEventListener('click', removeTask);
+
+    //event to clear all task
+    clearBtn.addEventListener('click', clearTasks);
 }
 
 //function to add task
@@ -50,7 +52,6 @@ function addTask(e) {
     taskInput.value = '';
 }
 
-
 //Remove Task
 function removeTask(e) {
     if(e.target.parentElement.classList.contains('delete-item')){
@@ -61,6 +62,13 @@ function removeTask(e) {
 }
 
 
+//function to clear all task
+function clearTasks() {
+    //check if there's any list item on the first child which is the first list item
+    while(taskList.firstChild){
+        taskList.removeChild(taskList.firstChild);
+    }
+}
 
 
 
