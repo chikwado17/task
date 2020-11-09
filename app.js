@@ -18,6 +18,9 @@ function loadAllEventListeners() {
 
     //event to clear all task
     clearBtn.addEventListener('click', clearTasks);
+
+    //event to filter task
+    filter.addEventListener('click', filterTasks);
 }
 
 //function to add task
@@ -70,7 +73,20 @@ function clearTasks() {
     }
 }
 
+//function to filter task
+function filterTasks(e) {
+    const text = e.target.value.toLowerCase();
 
+    document.querySelectorAll('.collection-item').forEach(function(task) {
+        const item = task.firstChild.textContent;
+
+        if(item.toLocaleLowerCase().indexOf(text) != -1) {
+            task.style.display = 'block';
+        }else {
+            task.style.display = 'none';
+        }
+    })
+}
 
 
 
