@@ -101,9 +101,6 @@ function addTask(e) {
 }
 
 
-
-
-
 //function to store task on local storage
 function storeTaskInLocalStorage(task) {
     let tasks;
@@ -119,19 +116,37 @@ function storeTaskInLocalStorage(task) {
 
 
 
-
-
-
-
-
-
 //Remove Task
 function removeTask(e) {
+
     if(e.target.parentElement.classList.contains('delete-item')){
         if(confirm('Are You Sure?')) {
             e.target.parentElement.parentElement.remove();
+
+            //remove task from local storage
+            removeTaskFromLocalStorage(e.target.parentElement.parentElement);
         }
     } 
+}
+
+
+//function to remove task from local storage
+function removeTaskFromLocalStorage(taskItem) {
+    let tasks;
+
+    if(localStorage.getItem('tasks') === null) {
+        tasks = [];
+    }else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    }
+
+    tasks.forEach(function(task, index) {
+        if(taskItem.textContent === task) {
+            tasks.splice(index, 1);
+        }
+    });
+
+    localStorage.setItem('tasks', JSON.stringify(tasks))
 }
 
 
@@ -141,7 +156,18 @@ function clearTasks() {
     while(taskList.firstChild){
         taskList.removeChild(taskList.firstChild);
     }
+
+    //clear tasks from local storage
+    clearTasksFromLocalStorage();
 }
+
+
+//function to clear tasks from local storage
+function clearTasksFromLocalStorage() {
+    localStorage.clear();
+}
+
+
 
 //function to filter task
 function filterTasks(e) {
@@ -157,14 +183,6 @@ function filterTasks(e) {
         }
     });
 }
-
-
-
-
-
-
-
-
 
 
 
